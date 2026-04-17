@@ -30,7 +30,6 @@ public class Autor {
     @Column(name = "cpf", unique = true)
     private String cpf;
 
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "autor_id")
     private List<Obra> obras;
