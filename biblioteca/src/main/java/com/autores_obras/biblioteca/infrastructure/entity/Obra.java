@@ -1,6 +1,5 @@
 package com.autores_obras.biblioteca.infrastructure.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +21,6 @@ public class Obra {
     private String nome;
     @Column(name = "descricao", length = 240)
     private String descricao;
-    @Column(name = "data_publicacao")
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @Column(name = "data")
     private LocalDate data;
 }
