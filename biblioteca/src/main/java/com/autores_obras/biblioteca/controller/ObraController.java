@@ -4,7 +4,10 @@ import com.autores_obras.biblioteca.business.ObraService;
 import com.autores_obras.biblioteca.infrastructure.entity.Obra;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -21,17 +24,12 @@ public class ObraController {
     }
 
     @GetMapping(params = "idAutor")
-    public ResponseEntity<List<Obra>> buscarObrasPorAutor(@RequestParam Long idAutor){
+    public ResponseEntity<List<Obra>> buscarObrasPorAutor(Long idAutor){
         return ResponseEntity.ok().body(service.buscarObraPorAutor(idAutor));
     }
 
-    @PutMapping(params = "id")
-    public ResponseEntity<Obra> atualizarObra(@RequestParam Long id, @RequestBody Obra obra){
-        return ResponseEntity.ok().body(service.atualizarObra(id, obra));
-    }
-
     @DeleteMapping(params = "id")
-    public ResponseEntity<Void> deletarObra(@RequestParam Long id){
+    public ResponseEntity<Void> deletarObra(Long id){
         service.deletarObra(id);
         return ResponseEntity.ok().build();
     }

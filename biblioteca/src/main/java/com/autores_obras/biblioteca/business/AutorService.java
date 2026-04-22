@@ -1,7 +1,6 @@
 package com.autores_obras.biblioteca.business;
 
 import com.autores_obras.biblioteca.infrastructure.entity.Autor;
-import com.autores_obras.biblioteca.infrastructure.exceptions.ResourceNotFoundException;
 import com.autores_obras.biblioteca.infrastructure.repository.AutorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class AutorService {
 
     public Autor atualizarAutor(Long id, Autor autor){
         Autor autorExistente = autorRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Autor não encontrado!"));
+                () -> new RuntimeException("Autor não encontrado!"));
         Autor autorAtualizado = Autor.builder()
                 .nome(autor.getNome() != null ? autor.getNome() : autorExistente.getNome())
                 .sexo(autor.getSexo() != null ? autor.getSexo() : autorExistente.getSexo())
@@ -33,7 +32,7 @@ public class AutorService {
                 .data_nascimento(autor.getData_nascimento() != null ? autor.getData_nascimento() : autorExistente.getData_nascimento())
                 .nacionalidade(autor.getNacionalidade() != null ? autor.getNacionalidade() : autorExistente.getNacionalidade())
                 .cpf(autor.getCpf() != null ? autor.getCpf() : autorExistente.getCpf())
-                .obras(autorExistente.getObras())
+                .obras(autor.getObras() != null ? autor.getObras() : autorExistente.getObras())
                 .id(autorExistente.getId())
                 .build();
 
